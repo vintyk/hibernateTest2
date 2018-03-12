@@ -4,8 +4,10 @@ import by.vinty.utils.ConcurrentUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.junit.*;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.List;
 
@@ -14,26 +16,26 @@ import static org.hamcrest.core.Is.is;
 
 public class EmployeeTest {
 
-//    private static SessionFactory SESSION_FACTORY;
+    //    private static SessionFactory SESSION_FACTORY;
 //    private static Session SESSION;
     private static SessionFactory SESSION_FACTORY;
 
     @BeforeClass
-    public static void init(){
+    public static void init() {
     }
 
     //Тестирование правильного маппинга
     @Test
-    public void testSaveEmployee(){
+    public void testSaveEmployee() {
         SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         Session session = SESSION_FACTORY.openSession();
 
         Employee employee = new Employee();
-        String etalonName = "Vinty"+ConcurrentUtils.getRandomName();
+        String etalonName = "Vinty" + ConcurrentUtils.getRandomName();
         employee.setName(etalonName);
         Long id = (Long) session.save(employee);
         System.out.println(id);
-        if (session.contains("Employee", employee)){
+        if (session.contains("Employee", employee)) {
             assertThat(employee.getName(), is(etalonName));
             assertThat(employee.getId(), is(id));
             System.out.println("Объект Employee в SESSION присутствует!");
@@ -49,7 +51,7 @@ public class EmployeeTest {
     }
 
     @AfterClass
-    public static void finish(){
+    public static void finish() {
         SESSION_FACTORY.close();
     }
 }

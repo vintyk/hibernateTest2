@@ -11,6 +11,5 @@
         <property name="format_sql">true</property>
 
         <mapping class="by.vinty.entity.Employee"/>
-
     </session-factory>
 </hibernate-configuration>
