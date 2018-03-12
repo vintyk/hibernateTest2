@@ -46,7 +46,7 @@ class EmployeeDaoTest {
         employee2.setName("Legolas");
         session.save(employee2);
 
-        long iMustFindId = 2l;
+        long iMustFindId = employee.getId();
         long idFromDb = 0l;
         Optional<Employee> employeeFromDb = Optional
                 .of(EmployeeDao.findById(iMustFindId, session).orElseThrow(NullPointerException::new));
