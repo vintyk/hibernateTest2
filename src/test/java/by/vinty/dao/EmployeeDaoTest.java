@@ -3,10 +3,12 @@ package by.vinty.dao;
 import by.vinty.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,49 +22,52 @@ class EmployeeDaoTest {
     @Test
     public void findByName() {
         Session session = SESSION_FACTORY.openSession();
-
+        Transaction transaction = session.beginTransaction();
         Employee employee = new Employee();
         employee.setName("Vinty");
         session.save(employee);
+        long iMustFindId = employee.getId();
 
         String iMustFindName = "Vinty";
         Employee resultEmployeeFromDb = EmployeeDao.findByName(iMustFindName, session);
         try {
             assertThat(resultEmployeeFromDb.getName(), is(employee.getName()));
         } catch (NullPointerException e) {
-            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findByName' не работает или в БД не найдено: "+ iMustFindName +" !!!---");
+            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findByName' не работает или в БД не найдено: " + iMustFindName + " !!!---");
         }
+//        EmployeeDao.deleteEmployee(resultEmployeeFromDb.getId(), session);
+        session.delete(employee);
+        transaction.commit();
         session.close();
     }
 
     @Test
-    public void findByIdTest(){
+    public void findByIdTest() {
         Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
         Employee employee = new Employee();
         employee.setName("Aragorn");
         session.save(employee);
-
-        Employee employee2 = new Employee();
-        employee2.setName("Legolas");
-        session.save(employee2);
-
         long iMustFindId = employee.getId();
+
         long idFromDb = 0l;
         Optional<Employee> employeeFromDb = Optional
                 .of(EmployeeDao.findById(iMustFindId, session).orElseThrow(NullPointerException::new));
-        try{
-            if (employeeFromDb.isPresent()){
+        try {
+            if (employeeFromDb.isPresent()) {
                 idFromDb = employeeFromDb.get().getId();
-                System.out.println("В БД Найден Employee с Id: " + idFromDb + " и именем: "+employeeFromDb.get().getName());
-            }else {
+                System.out.println("В БД Найден Employee с Id: " + idFromDb + " и именем: " + employeeFromDb.get().getName());
+            } else {
                 System.out.println("Из БД не вернулся объект класса Employee!");
             }
-        }catch (NullPointerException e){
-            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findById' не работает или в БД не найдено: "+ iMustFindId +" !!!---");
+        } catch (NullPointerException e) {
+            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findById' не работает или в БД не найдено: " + iMustFindId + " !!!---");
         }
         assertThat(iMustFindId, is(idFromDb));
+        EmployeeDao.deleteEmployee(iMustFindId, session);
+        transaction.commit();
+        session.close();
     }
-
 
     @AfterClass
     public void finish() {

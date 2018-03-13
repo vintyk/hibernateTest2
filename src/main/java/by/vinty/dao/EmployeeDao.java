@@ -4,11 +4,12 @@ import by.vinty.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 public class EmployeeDao {
-
+//Получить первое имя в поиске
     public static Employee findByName(String name, Session session) {
         Employee result = null;
         String hql = "FROM Employee E WHERE E.name = '" + name + "'";
@@ -22,7 +23,7 @@ public class EmployeeDao {
         return result;
     }
 
-    public static Optional<Employee> findById(long id, Session session){
+    public static Optional<Employee> findById(long id, Session session) {
         Employee employee = new Employee();
         String hql = "FROM Employee E WHERE E.id = " + id;
         Query query = session.createQuery(hql);
@@ -33,5 +34,10 @@ public class EmployeeDao {
             e.fillInStackTrace();
         }
         return Optional.ofNullable(employee);
+    }
+
+    public static void deleteEmployee(Long id, Session session) {
+        Employee employee = session.load(Employee.class, id);
+        session.delete(employee);
     }
 }
