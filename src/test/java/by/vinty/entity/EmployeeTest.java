@@ -24,6 +24,11 @@ public class EmployeeTest {
     public static void init() {
     }
 
+    @AfterClass
+    public static void finish() {
+        SESSION_FACTORY.close();
+    }
+
     //Тестирование правильного маппинга
     @Test
     public void testSaveEmployee() {
@@ -50,10 +55,6 @@ public class EmployeeTest {
         session.close();
         System.out.println("Vinty запустил Jenkins");
         System.out.println("Vinty запустил Jenkins с проекта Maven");
-    }
-
-    @AfterClass
-    public static void finish() {
-        SESSION_FACTORY.close();
+        System.out.println("Vinty запустил Jenkins с проекта Maven 2");
     }
 }
