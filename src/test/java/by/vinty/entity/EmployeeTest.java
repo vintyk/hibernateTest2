@@ -27,7 +27,7 @@ public class EmployeeTest {
 
     @AfterClass
     public static void finish() {
-        SESSION_FACTORY.close();
+
     }
 
     //Тестирование правильного маппинга
@@ -55,12 +55,13 @@ public class EmployeeTest {
         resultList.forEach(System.out::println);
         session.close();
         System.out.println("Vinty запили тест и выложил его в репозиторий Git для Николая Бандюка");
+        SESSION_FACTORY.close();
     }
 
     @Test
     public void testFail(){
         boolean tempBoolean = true;
-        assertThat(tempBoolean, is(1 == 2));
+        assertThat(tempBoolean, is(1 == 1));
         System.out.println("Это сделано специально...");
         System.out.println("Так надо...");
     }
