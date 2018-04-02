@@ -56,5 +56,6 @@ public class EmployeeTest {
         System.out.println("Vinty запустил Jenkins");
         System.out.println("Vinty запустил Jenkins с проекта Maven");
         System.out.println("Vinty запустил Jenkins с проекта Maven 2");
+        System.out.println("Vinty запустил Jenkins с проекта Maven 3");
     }
 }
