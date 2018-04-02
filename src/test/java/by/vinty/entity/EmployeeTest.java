@@ -62,5 +62,6 @@ public class EmployeeTest {
         boolean tempBoolean = true;
         assertThat(tempBoolean, is(1 == 2));
         System.out.println("Это сделано специально...");
+        System.out.println("Так надо...");
     }
 }
