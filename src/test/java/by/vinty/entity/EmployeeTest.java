@@ -49,6 +49,7 @@ public class EmployeeTest {
         resultList.forEach(System.out::println);
         session.close();
         System.out.println("Vinty запустил Jenkins");
+        System.out.println("Vinty запустил Jenkins с проекта Maven");
     }
 
     @AfterClass
