@@ -48,6 +48,7 @@ public class EmployeeTest {
 //        "from Employee where id between 1 and 20", Employee.class).getResultList();
         resultList.forEach(System.out::println);
         session.close();
+        System.out.println("Vinty запустил Jenkins");
     }
 
     @AfterClass

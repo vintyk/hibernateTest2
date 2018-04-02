@@ -30,39 +30,35 @@ class EmployeeDaoTest {
         try {
             assertThat(resultEmployeeFromDb.getName(), is(employee.getName()));
         } catch (NullPointerException e) {
-            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findByName' не работает или в БД не найдено: "+ iMustFindName +" !!!---");
+            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findByName' не работает или в БД не найдено: " + iMustFindName + " !!!---");
         }
         session.close();
     }
 
     @Test
-    public void findByIdTest(){
+    public void findByIdTest() {
         Session session = SESSION_FACTORY.openSession();
+
         Employee employee = new Employee();
         employee.setName("Aragorn");
-        session.save(employee);
+        Long employeeId = EmployeeDao.saveEmployee(employee, session);
 
-        Employee employee2 = new Employee();
-        employee2.setName("Legolas");
-        session.save(employee2);
-
-        long iMustFindId = 2l;
-        long idFromDb = 0l;
+        Long iMustFindId = employeeId;
+        Long idFromDb = 0l;
         Optional<Employee> employeeFromDb = Optional
                 .of(EmployeeDao.findById(iMustFindId, session).orElseThrow(NullPointerException::new));
-        try{
-            if (employeeFromDb.isPresent()){
+        try {
+            if (employeeFromDb.isPresent()) {
                 idFromDb = employeeFromDb.get().getId();
-                System.out.println("В БД Найден Employee с Id: " + idFromDb + " и именем: "+employeeFromDb.get().getName());
-            }else {
+                System.out.println("В БД Найден Employee с Id: " + idFromDb + " и именем: " + employeeFromDb.get().getName());
+            } else {
                 System.out.println("Из БД не вернулся объект класса Employee!");
             }
-        }catch (NullPointerException e){
-            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findById' не работает или в БД не найдено: "+ iMustFindId +" !!!---");
+        } catch (NullPointerException e) {
+            Assert.assertEquals(true, "--- Сработало исключение: Метод  'findById' не работает или в БД не найдено: " + iMustFindId + " !!!---");
         }
         assertThat(iMustFindId, is(idFromDb));
     }
-
 
     @AfterClass
     public void finish() {

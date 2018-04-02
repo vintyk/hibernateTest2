@@ -4,9 +4,12 @@ import by.vinty.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class EmployeeDao {
 
     public static Employee findByName(String name, Session session) {
@@ -33,5 +36,10 @@ public class EmployeeDao {
             e.fillInStackTrace();
         }
         return Optional.ofNullable(employee);
+    }
+
+    public static Long saveEmployee(Employee employee, Session session){
+        session.save(employee);
+        return employee.getId();
     }
 }
