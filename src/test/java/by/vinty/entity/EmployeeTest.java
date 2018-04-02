@@ -8,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.TestTemplate;
 
 import java.util.List;
 
@@ -53,9 +54,12 @@ public class EmployeeTest {
 //        "from Employee where id between 1 and 20", Employee.class).getResultList();
         resultList.forEach(System.out::println);
         session.close();
-        System.out.println("Vinty запустил Jenkins");
-        System.out.println("Vinty запустил Jenkins с проекта Maven");
-        System.out.println("Vinty запустил Jenkins с проекта Maven 2");
-        System.out.println("Vinty запустил Jenkins с проекта Maven 3");
+        System.out.println("Vinty запили тест и выложил его в репозиторий Git для Николая Бандюка");
+    }
+
+    @Test
+    public void testFail(){
+        boolean tempBoolean = true;
+        assertThat(tempBoolean, is(1 == 2));
     }
 }
