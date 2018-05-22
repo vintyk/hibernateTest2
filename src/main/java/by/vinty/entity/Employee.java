@@ -25,10 +25,12 @@ public final class Employee {
     public void myMethod() {
         System.out.println("Я метод класса Employee. Совершенно простой.");
     }
-    public void myMethod2(){
+
+    public void myMethod2() {
         System.out.println("Я совершенно другой метод. Умею что-то считать.");
     }
-    public void myMethod3(){
+
+    public void myMethod3() {
         System.out.println("Я метод, который что-то там делает с именем.");
     }
 }

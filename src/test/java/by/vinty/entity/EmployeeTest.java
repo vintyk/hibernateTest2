@@ -8,7 +8,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import java.util.List;
 
@@ -49,8 +48,7 @@ public class EmployeeTest {
         Assert.assertEquals(etalonName, session.find(Employee.class, id).getName());
 
         List<Employee> resultList =
-                session.createQuery(
-                        "from Employee", Employee.class).getResultList();
+                session.createQuery("from Employee", Employee.class).getResultList();
 //        "from Employee where id between 1 and 20", Employee.class).getResultList();
         resultList.forEach(System.out::println);
         session.close();
@@ -59,7 +57,7 @@ public class EmployeeTest {
     }
 
     @Test
-    public void testFail(){
+    public void testFail() {
         boolean tempBoolean = true;
         assertThat(tempBoolean, is(1 == 1));
         System.out.println("Это сделано специально...");

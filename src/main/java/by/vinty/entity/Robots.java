@@ -1,6 +1,5 @@
 package by.vinty.entity;
 
-import by.vinty.starters.ConcurrentUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
