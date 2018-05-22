@@ -29,9 +29,11 @@ public final class Employee {
 
     public void myMethod2() {
         System.out.println("Я совершенно другой метод. Умею что-то считать.");
+        System.out.println("Я изменил кардинальным образом метод!!!!");
     }
 
     public void myMethod3() {
         System.out.println("Я метод, который что-то там делает с именем.");
+        System.out.println("Я изменил кардинальным образом метод!!!!");
     }
 }

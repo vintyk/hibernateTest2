@@ -10,10 +10,6 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-
 public class EmployeeDaoTest {
 
     private static SessionFactory SESSION_FACTORY
@@ -45,6 +41,7 @@ public class EmployeeDaoTest {
         Employee employee = new Employee();
         employee.setName("Aragorn");
         Long employeeId = EmployeeDao.saveEmployee(employee, session);
+        System.out.println("Я что-то поменял в системе тестов!!!!!");
 
         Long iMustFindId = employeeId;
         Long idFromDb = 0l;
@@ -56,6 +53,7 @@ public class EmployeeDaoTest {
                 System.out.println("В БД Найден Employee с Id: " + idFromDb + " и именем: " + employeeFromDb.get().getName());
             } else {
                 System.out.println("Из БД не вернулся объект класса Employee!");
+                System.out.println("Я что-то поменял в системе тестов!!!!!");
             }
         } catch (NullPointerException e) {
             Assert.assertEquals(true, "--- Сработало исключение: Метод  'findById' не работает или в БД не найдено: " + iMustFindId + " !!!---");
