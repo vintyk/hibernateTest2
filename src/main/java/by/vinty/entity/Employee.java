@@ -24,6 +24,7 @@ public final class Employee {
 
     public void myMethod() {
         System.out.println("Я метод класса Employee. Совершенно простой.");
+        System.out.println("Я изменил кардинальным образом метод!!!!");
     }
 
     public void myMethod2() {

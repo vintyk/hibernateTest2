@@ -60,6 +60,7 @@ public class EmployeeDaoTest {
         } catch (NullPointerException e) {
             Assert.assertEquals(true, "--- Сработало исключение: Метод  'findById' не работает или в БД не найдено: " + iMustFindId + " !!!---");
         }
+        System.out.println("Я что-то поменял в системе тестов!!!!!");
         Assert.assertEquals(iMustFindId, idFromDb);
 //        assertThat(iMustFindId, is(idFromDb));
     }
