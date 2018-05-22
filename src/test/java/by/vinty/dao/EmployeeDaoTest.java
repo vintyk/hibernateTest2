@@ -16,8 +16,8 @@ import static org.hamcrest.core.Is.is;
 
 public class EmployeeDaoTest {
 
-    private static SessionFactory SESSION_FACTORY;
-//            = new org.hibernate.cfg.Configuration().configure().buildSessionFactory();
+    private static SessionFactory SESSION_FACTORY
+            = new org.hibernate.cfg.Configuration().configure().buildSessionFactory();
 
     @Test
     public void findByName() {
@@ -60,6 +60,7 @@ public class EmployeeDaoTest {
         } catch (NullPointerException e) {
             Assert.assertEquals(true, "--- Сработало исключение: Метод  'findById' не работает или в БД не найдено: " + iMustFindId + " !!!---");
         }
+        Assert.assertEquals(iMustFindId, idFromDb);
 //        assertThat(iMustFindId, is(idFromDb));
     }
 
